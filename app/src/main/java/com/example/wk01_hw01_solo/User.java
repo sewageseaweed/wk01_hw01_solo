@@ -11,6 +11,12 @@ public class User {
     @SerializedName("id")
     private int userId;
 
+    public User(String username, String name, int userId) {
+        this.username = username;
+        this.name = name;
+        this.userId = userId;
+    }
+
     public String getUsername() {
         return username;
     }
