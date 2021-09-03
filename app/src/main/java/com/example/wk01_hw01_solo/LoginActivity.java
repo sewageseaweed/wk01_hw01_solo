@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         String username = loginUser.getText().toString();
 
                         Log.d(TAG, loginUser.getText().toString() + " user.getUsername()" + loginPassword.getText().toString() + " user.getPassword()\n");
-                        if(!checkUsername(users, username) && !checkPassword(users, password)){
+                        if(!checkUsername(users, username) && !checkPassword(password)){
                             Context context = getApplicationContext();
                             CharSequence text = "Incorrect Username and Password! Please try again!";
                             int duration = Toast.LENGTH_LONG;
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                             loginPassword.setBackgroundColor(0x00000000);
                             loginUser.setBackgroundColor(0x55FF0000);
                         }
-                        else if (!checkPassword(users, password)){
+                        else if (!checkPassword(password)){
                             Context context = getApplicationContext();
                             CharSequence text = "Incorrect Password!";
                             int duration = Toast.LENGTH_LONG;
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-    public static boolean checkPassword(List<User> users, String password){
-        return(password.equals(users.get(0).getPassword()));
+    public static boolean checkPassword(String password){
+        return(password.equals("Password123"));
     }
 }

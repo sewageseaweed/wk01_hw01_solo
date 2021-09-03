@@ -21,7 +21,7 @@ public class LoginUnitTest {
         ArrayList users = new ArrayList<>();
         User newUser = new User("Samantha", "Clementine Bauch", 3);
         users.add(newUser);
-        assertEquals(false, LoginActivity.checkPassword(users, "Samantha1"));
+        assertEquals(false, LoginActivity.checkPassword("Samantha1"));
     }
 
     @Test
@@ -37,6 +37,6 @@ public class LoginUnitTest {
         ArrayList users = new ArrayList<>();
         User newUser = new User("Samantha", "Clementine Bauch", 3);
         users.add(newUser);
-        assertEquals(true, LoginActivity.checkPassword(users, "Password123"));
+        assertEquals(true, LoginActivity.checkPassword("Password123"));
     }
 }
