@@ -2,9 +2,11 @@ package com.example.wk01_hw01_solo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -46,10 +48,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 List<Post> posts = response.body();
-
+                String content = "Welcome back, " + username + "!\n\n";
+                textViewResult.append(content);
                 for(Post post: posts){
                     if (userId == post.getUserId()) {
-                        String content = "";
+                        content = "";
                         content += "Name: " + name + "\n";
                         content += "Username: " + username + "\n";
                         content += "UserId: " + userId + "\n";

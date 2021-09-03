@@ -2,6 +2,7 @@ package com.example.wk01_hw01_solo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Button;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -55,11 +57,44 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         List<User> users = response.body();
+                        String password =  loginPassword.getText().toString();
+                        String username = loginUser.getText().toString();
 
-                        for(User user: users){
-                            Log.d(TAG, loginUser.getText().toString() + " user.getUsername()" + loginPassword.getText().toString() + " user.getPassword()\n");
-                            if(loginUser.getText().toString().equals(user.getUsername()) && loginPassword.getText().toString().equals(user.getPassword())){
-                                openMainActivity(user.getUserId(), user.getUsername(), user.getName());
+                        Log.d(TAG, loginUser.getText().toString() + " user.getUsername()" + loginPassword.getText().toString() + " user.getPassword()\n");
+                        if(!checkUsername(users, username) && !checkPassword(password)){
+                            Context context = getApplicationContext();
+                            CharSequence text = "Incorrect Username and Password! Please try again!";
+                            int duration = Toast.LENGTH_LONG;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            loginUser.setBackgroundColor(0x55FF0000);
+                            loginPassword.setBackgroundColor(0x55FF0000);
+                        }
+                        else if (!checkUsername(users, username)){
+                            Context context = getApplicationContext();
+                            CharSequence text = "Incorrect Username!";
+                            int duration = Toast.LENGTH_LONG;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            loginPassword.setBackgroundColor(0x00000000);
+                            loginUser.setBackgroundColor(0x55FF0000);
+                        }
+                        else if (!checkPassword(password)){
+                            Context context = getApplicationContext();
+                            CharSequence text = "Incorrect Password!";
+                            int duration = Toast.LENGTH_LONG;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            loginUser.setBackgroundColor(0x00000000);
+                            loginPassword.setBackgroundColor(0x55FF0000);
+                        }
+                        else{
+                            loginUser.setBackgroundColor(0x00000000);
+                            loginPassword.setBackgroundColor(0x00000000);
+                            for(User user: users) {
+                                if (username.equals(user.getUsername())) {
+                                    openMainActivity(user.getUserId(), username, user.getName());
+                                }
                             }
                         }
                     }
@@ -79,5 +114,18 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("userId", userId);
         intent.putExtra("username", username);
         startActivity(intent);
+    }
+
+    public static boolean checkUsername(List<User> users, String username){
+        for(User user: users){
+            if(username.equals(user.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkPassword(String password){
+        return(password.equals("Password123"));
     }
 }
