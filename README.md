@@ -7,3 +7,4 @@ First homework for CST438
 https://user-images.githubusercontent.com/41974151/132071710-1fd1c051-4118-4cdd-842f-c5fb5f3f8fb5.mp4
 
 
+Video link in case embedding doesnt work: https://youtu.be/A8sNwmbVIqc
